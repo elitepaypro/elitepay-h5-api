@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pdf打印</title>
+    <script src="/vendor/laravel-admin/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="../vendor/pdfobject.min.js"></script>
+    <style>
+        .pdf-show {
+            position: fixed;
+            top: 50px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+<div class="pdf-show">
+
+</div>
+</body>
+<script>
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+
+    var pdfUrl = getQueryString('pdfUrl')
+    setTimeout(function () {
+        PDFObject.embed('https://'+ document.location.hostname + pdfUrl, '.pdf-show')
+    }, 1000)
+</script>
+</html>
